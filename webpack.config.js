@@ -14,19 +14,19 @@ const runEslint = new LoaderOptionsPlugin({
 })
 
 module.exports={
-    entry: path.resolve(__dirname,'./client/js/sample.js'),
+    entry: path.resolve(__dirname,'client/js/main.js'),
     output: {
-	path: path.resolve(__dirname,'./server/public/'),
+	path: path.resolve(__dirname,'server/public/'),
 	filename: 'app.js'
     },
     module: {
 	rules:[
-	  {
-	    enforce: 'pre',
-	    test: /\.js$/,
-	    loader: 'eslint-loader',
-	    exclude: /node_modules/
-	  },
+	 // {
+	 //   enforce: 'pre',
+	 //   test: /\.js$/,
+	  //  loader: 'eslint-loader',
+	  //  exclude: /node_modules/
+	  //},
 	  {
 	    test: /\.js$/,
 	    exclude: /node_modules/,

@@ -1,5 +1,6 @@
 // controllers/index.js
 
 module.exports = {
-	home: require('./home')
+	home: require('./home'),
+	testserver: require('./testserver')
 }
