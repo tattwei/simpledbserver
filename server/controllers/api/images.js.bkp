@@ -1,0 +1,26 @@
+// controllers/api/images.js
+
+let Models = require('../../models')
+let mongoose = require('mongoose')
+var ImageSchema = new mongoose.Schema({
+	url: String,
+	filename: String,
+	uniqueid: String,
+	timestamp: {type: Date, default:Date.now()}
+});
+
+var myImage = mongoose.model('images', ImageSchema);   // name of the MongoDB collection followed by Schema
+
+module.exports={
+    
+   mydefault(req,res){
+	let mymodel = { layout: false, place: 'Malaysia'}
+     res.render('home', mymodel)
+  },
+
+    list(req,res){
+	myImage.find({}, (err,images)=>{
+		res.json(images)            // prints the json returned from find{} operation
+	})
+    }
+}
