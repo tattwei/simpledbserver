@@ -1,10 +1,17 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin'),
-	path = require('path')
+	path = require('path'),
+	LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin')
 
 const extractSass = new ExtractTextPlugin({
 	filename: "css/[name].css",
 	disable: process.env.NODE_ENV === "development"
-});
+})
+
+const runEslint = new LoaderOptionsPlugin({
+	options:{
+	    eslint: {configFile: '.eslintrc'}
+	}
+})
 
 module.exports={
     entry: path.resolve(__dirname,'./client/js/sample.js'),
@@ -14,6 +21,12 @@ module.exports={
     },
     module: {
 	rules:[
+	  {
+	    enforce: 'pre',
+	    test: /\.js$/,
+	    loader: 'eslint-loader',
+	    exclude: /node_modules/
+	  },
 	  {
 	    test: /\.js$/,
 	    exclude: /node_modules/,
@@ -37,7 +50,8 @@ module.exports={
 	]
     },
     plugins: [
-	extractSass
+	extractSass,
+	runEslint
     ],
     resolve: {
 	modules: [

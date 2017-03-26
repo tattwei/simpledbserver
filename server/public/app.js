@@ -82,9 +82,12 @@
 __webpack_require__(0);
 
 var collection = [1, 2, 3, 4, 5];
+
+/* eslint-disable no-console */
 collection.forEach(function (item) {
   return console.log(item);
 });
+/* eslint-enable no-console*/
 
 /***/ })
 /******/ ]);
