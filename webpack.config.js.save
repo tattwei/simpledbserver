@@ -1,0 +1,52 @@
+	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	path = require('path')
+
+const sassLoaders = [
+	'css-loader',
+	'postcss-loader',
+	'sass-loader?includePaths[]=' + path.resolve(__dirname,'.client')
+]
+
+module.exports={
+    entry: '/home/cms/eric/simpledbserver/client/js/sample.js',
+    output: {
+	path: '/home/cms/eric/simpledbserver/server/public/',
+	filename: 'app.js'
+    },
+    module: {
+	rules:[
+	  {
+	    test: /\.js$/,
+	    exclude: /node_modules/,
+	    loader: 'babel-loader',
+	    query:{
+		cacheDirectory: true,
+		presets: ['es2015', 'stage-1', 'react']
+	    }
+	  },
+	  {
+	    test: /\.sass$/,
+	    loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: sassLoaders.join('!')})
+	  },
+	  {
+	    test: /\.css$/,
+	    loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: sassLoaders.join('!')})
+	    options: { 
+	      plugins: function() {
+		return[ require('precss'), require('autoprefixer')];}
+	    }
+	}
+	],
+    },
+    plugins: [
+	new ExtractTextPlugin('[name].css')
+    ],
+    resolve: {
+	modules: [
+	    "node_modules",
+	    path.resolve(__dirname,"client")
+	],
+	extensions: ['.js','.sass','.css']
+    }
+
+}

@@ -1,0 +1,28 @@
+// client/js/components/App.js
+
+import 'stylesheets/base.sass'
+import React, {Component} from 'react'
+import Header from './layout/Header'
+
+class App extends Component{
+  static propTypes = {
+   children: React.PropTypes.node   
+  }
+  megaLogger(message){
+    console.log(message)
+  }
+
+  render(){
+
+    return(
+      <div>
+      <div className="body">
+      <p> Student is {myvar} </p>
+      </div>
+      </div>
+    )
+  }
+}
+
+export default App
+
